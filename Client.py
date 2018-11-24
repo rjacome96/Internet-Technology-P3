@@ -20,11 +20,11 @@ def connectClient():
         return
     """
 
-    asPort = 6000
+    rsPort = 6000
     #rsHostName = rootServerName
     rsHostName = ""
     rsAddr = aSocket.gethostbyname(rsHostName)
-    rsSocketConnection = (rsAddr, asPort)
+    rsSocketConnection = (rsAddr, rsPort)
 
     rsClientSocket.connect(rsSocketConnection)
 
