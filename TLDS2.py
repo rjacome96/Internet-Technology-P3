@@ -4,7 +4,7 @@ import time
 import hmac
 
 def TLDS2Server():
-    
+
     try:
         rootServerSocket = aSocket.socket(aSocket.AF_INET, aSocket.SOCK_STREAM)
         clientSocket = aSocket.socket(aSocket.AF_INET, aSocket.SOCK_STREAM)
@@ -58,7 +58,14 @@ def TLDS2Server():
 
         print("[TLDS2]: Recieved from root server: {}".format(serverInfo))
 
-        rootSocket.send("TLDS2 Server here".encode('utf-8'))
+        # Might need to delete the array for TLDS server only uses 1 key
+        tldsKey = tlds2_keys[0]
+
+        tlds2Digest = hmac.new(tldsKey.encode(), serverInfo.encode('utf-8'))
+
+        tlds2DigestHex = tlds2Digest.hexdigest()
+
+        rootSocket.send(tlds2DigestHex.encode('utf-8'))
 
 
     time.sleep(10)

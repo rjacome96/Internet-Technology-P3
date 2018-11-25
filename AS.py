@@ -1,5 +1,6 @@
 import socket as aSocket
 import time
+import hmac
 import sys
 
 def AuthenticationServer():
@@ -58,21 +59,34 @@ def AuthenticationServer():
         clientInfo = clientInfo.split()
         
         clientChallengeString = clientInfo[0]
-        clientDigest = clientInfo[1]
+        clientDigestHex = clientInfo[1]
 
         print("[AS]: Client challenge string: {}".format(clientChallengeString))
-        print("[AS]: Client digest: {}".format(clientDigest))
-		
-        dataToClient = "Test"
-        clientSocket.send(dataToClient.encode('utf-8'))
+        print("[AS]: Client digest: {}".format(clientDigestHex))
 
-        tlds1SocketServer.send("AS to TLDS1 here".encode('utf-8'))
-        tlds2SocketServer.send("AS to TLDS2 here".encode('utf-8'))
+        tlds1SocketServer.send(clientChallengeString.encode('utf-8'))
+        tlds2SocketServer.send(clientChallengeString.encode('utf-8'))
         
-        tlds1Message = tlds1SocketServer.recv(1024).decode('utf-8')
-        tlds2Message = tlds2SocketServer.recv(1024).decode('utf-8')
-        print("[AS]: {}".format(tlds1Message))
-        print("[AS]: {}".format(tlds2Message))
+        tlds1DigestHex = tlds1SocketServer.recv(1024).decode('utf-8')
+        tlds2DigestHex = tlds2SocketServer.recv(1024).decode('utf-8')
+        print("[AS]: {}".format(tlds1DigestHex))
+        print("[AS]: {}".format(tlds2DigestHex))
+
+
+        # Client is authenticated for TLDS1
+        if(hmac.compare_digest(clientDigestHex, tlds1DigestHex)):
+            print("[AS]: Client authorized for TLDS1")
+            dataToClient = "TLDS1"
+        # Client is authenticated for TLDS2
+        elif(hmac.compare_digest(clientDigestHex, tlds2DigestHex)):
+            print("[AS]: Client authorized for TLDS2")
+            dataToClient = "TLDS2"
+        # No server authenticated for Client
+        else:
+            print("[AS]: No digest matched")
+            dataToClient = "No Digest Match"
+
+        clientSocket.send(dataToClient.encode('utf-8'))
 
 		
 

@@ -52,6 +52,14 @@ def connectClient():
                     # Get resulting tlds server from RS server
                     serverResult = rsClientSocket.recv(1024).decode('utf-8')
 
+                    if(serverResult == "TLDS1"):
+                        print("[C]: Connect to TLDS1")
+                    elif(serverResult == "TLDS2"):
+                        print("[C]: Connect to TLDS2")
+                    else:
+                        print("[C]: Client does not connect to anyone")
+                
+
                     # Write result to file
                     writeFile.write(serverResult + "\n")
     except FileNotFoundError as err:
