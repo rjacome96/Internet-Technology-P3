@@ -1,0 +1,4 @@
+rutgers.edu 100.100.50.50 A
+njcu.edu 20.5.8.90 A
+princeton.edu 150.50.200.5 A
+njit.edu 123.54.32.1 A

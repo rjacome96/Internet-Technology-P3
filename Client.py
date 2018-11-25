@@ -6,19 +6,13 @@ def connectClient():
 
     try:
         rsClientSocket = aSocket.socket(aSocket.AF_INET, aSocket.SOCK_STREAM)
+        tlds1Socket = aSocket.socket(aSocket.AF_INET, aSocket.SOCK_STREAM)
+        tlds2Socket = aSocket.socket(aSocket.AF_INET, aSocket.SOCK_STREAM)
         print("[C]: Successfully created sockets")
     except aSocket.error as err:
         print("Socket open error: {0} \n".format(err))
-
-    """
-    Block of code to uncomment if we need to receive
-    input from command line
-    try:
-        rootServerName = sys.argv[1]
-    except IndexError:
-        print("Not enough arguments given")
         return
-    """
+
 
     rsPort = 6000
     #rsHostName = rootServerName
@@ -31,19 +25,37 @@ def connectClient():
     #hnsFile = sys.argv[2]
     hnsFile = "PROJ3-HNS.txt"
 
-    with open(hnsFile, "r") as readFile:
-        with open("RESOLVED.txt", "w") as writeFile:
-            for hostName in readFile:
-                # Stripping the new line at the end
-                hostName = hostName.rstrip()
-                # First contact to RS server
-                rsClientSocket.send(hostName.encode('utf-8'))
+    try:
+        with open(hnsFile, "r") as readFile:
+            with open("RESOLVED.txt", "w") as writeFile:
+                for line in readFile:
 
-                # Get resulting String from server
-                serverResult = rsClientSocket.recv(1024).decode('utf-8')
+                    infoLine = line.split()
 
-                # Write result to file
-                writeFile.write(serverResult + "\n")
+                    # Stripping the new line at the end
+                    clientKey = infoLine[0].rstrip()
+                    clientChallenge = infoLine[1].rstrip()
+                    hostName = infoLine[2].rstrip()
+
+                    clientDigest = hmac.new(clientKey.encode(), clientChallenge.encode('utf-8'))
+
+                    clientDigestHex = clientDigest.hexdigest()
+
+                    sendToRootServer = clientChallenge + " " + clientDigestHex
+
+                    print("[C]: {}".format(sendToRootServer))
+                    
+
+                    # First contact to RS server
+                    rsClientSocket.send(sendToRootServer.encode('utf-8'))
+
+                    # Get resulting tlds server from RS server
+                    serverResult = rsClientSocket.recv(1024).decode('utf-8')
+
+                    # Write result to file
+                    writeFile.write(serverResult + "\n")
+    except FileNotFoundError as err:
+        print("File not found. Please try again")
 
 
     rsClientSocket.shutdown(aSocket.SHUT_RDWR)

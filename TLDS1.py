@@ -4,18 +4,23 @@ import time
 import hmac
 
 def TLDS1Server():
+    
     try:
         rootServerSocket = aSocket.socket(aSocket.AF_INET, aSocket.SOCK_STREAM)
+        clientSocket = aSocket.socket(aSocket.AF_INET, aSocket.SOCK_STREAM)
         print("[TLDS1]: Successfully created sockets")
     except aSocket.error as err:
         print("Socket open error {}\n".format(err))
+        return
 
     dnsFile = "PROJ3-TLDS1.txt"
+    keys1File = "PROJ3-KEY1.txt"
 
     tlds1_Dict = {}
+    tlds1_keys = []
 
     try:
-        with open(dnsFile, "r") as dnsTableFile:
+        with open(dnsFile, "r") as dnsTableFile, open(keys1File, "r") as keysFile:
             for fieldLine in dnsTableFile:
                 dictKey = fieldLine.rstrip()
                 recordString = dictKey.rsplit()
@@ -24,6 +29,10 @@ def TLDS1Server():
                 flag = recordString[2].rstrip()
                 
                 tlds1_Dict[hostName] = (ipAddress, flag)
+            
+            for key in keysFile:
+                key = key.rstrip()
+                tlds1_keys.append(key)
     except FileNotFoundError:
         print("File not Found. Please Try again")
         return

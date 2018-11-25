@@ -12,6 +12,7 @@ def AuthenticationServer():
         print("[AS]: Successfully created socket")
     except aSocket.error as err:
         print("Socket open error: {0} \n".format(err))
+        return
 
     tlds1ServerHostName = ''
     tlds2ServerHostName = ''
@@ -53,6 +54,14 @@ def AuthenticationServer():
             break
 
         print("[AS]: Recieved from client: {}".format(clientInfo))
+
+        clientInfo = clientInfo.split()
+        
+        clientChallengeString = clientInfo[0]
+        clientDigest = clientInfo[1]
+
+        print("[AS]: Client challenge string: {}".format(clientChallengeString))
+        print("[AS]: Client digest: {}".format(clientDigest))
 		
         dataToClient = "Test"
         clientSocket.send(dataToClient.encode('utf-8'))
