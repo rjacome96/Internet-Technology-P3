@@ -7,7 +7,7 @@ def TLDS1Server():
 
     try:
         rootServerSocket = aSocket.socket(aSocket.AF_INET, aSocket.SOCK_STREAM)
-        clientSocket = aSocket.socket(aSocket.AF_INET, aSocket.SOCK_STREAM)
+        clientServerSocket = aSocket.socket(aSocket.AF_INET, aSocket.SOCK_STREAM)
         print("[TLDS1]: Successfully created sockets")
     except aSocket.error as err:
         print("Socket open error {}\n".format(err))
@@ -37,17 +37,26 @@ def TLDS1Server():
         print("File not Found. Please Try again")
         return
 
-    port = 7000
-    serverBinding = ('', port)
+    rootPort = 7000
+    serverBinding = ('', rootPort)
     rootServerSocket.bind(serverBinding)
-    print("[TLDS1]: Socket is binded to port: {}".format(port))
+    print("[TLDS1]: Root Server socket is binded to port: {}".format(rootPort))
+
+    clientPort = 7500
+    serverBinding = ('', clientPort)
+    clientServerSocket.bind(serverBinding)
+    print("[TLDS1]: Client Socket is binded to port: {}".format(clientPort))
+
 
     rootServerSocket.listen(1)
-    print("[TLDS1]: Listening for one connection on port 7000...")
+    print("[TLDS1]: Listening for one connection on port {}".format(rootPort))
+    clientServerSocket.listen(1)
 
     rootConnection = rootServerSocket.accept()
+    clientConnection = clientServerSocket.accept()
     
     rootSocket = rootConnection[0]
+    clientSocket = clientConnection[0]
 
     while True:
 

@@ -27,14 +27,14 @@ def AuthenticationServer():
     # Connect to tlds1 server
     tlds1ServerPort = 7000
     tlds1ServerAddr = aSocket.gethostbyname(tlds1ServerHostName)
-    tlds1ServerConnection = (tlds1ServerAddr, tlds1ServerPort)
+    #tlds1ServerConnection = (tlds1ServerAddr, tlds1ServerPort)
     tlds1ServerConnection = ('', tlds1ServerPort)
     tlds1SocketServer.connect(tlds1ServerConnection)
 
     # Connect to tlds2 server
     tlds2ServerPort = 8000
     tlds2ServerAddr = aSocket.gethostbyname(tlds2ServerHostName)
-    tlds2ServerConnection = (tlds2ServerAddr, tlds2ServerPort)
+    #tlds2ServerConnection = (tlds2ServerAddr, tlds2ServerPort)
     tlds2ServerConnection = ('', tlds2ServerPort)
     tlds2SocketServer.connect(tlds2ServerConnection)
 
