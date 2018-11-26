@@ -70,11 +70,11 @@ def connectClient():
                     if(serverResult == tlds1ServerName):
                         print("[C]: Connect to TLDS1")
                         tlds1SocketServer.send(hostName.encode('utf-8'))
-                        serverResult = tlds1SocketServer.recv(1024).decode
+                        serverResult = tlds1SocketServer.recv(1024).decode('utf-8')
                     elif(serverResult == tlds2ServerName):
                         print("[C]: Connect to TLDS2")
                         tlds2SocketServer.send(hostName.encode('utf-8'))
-                        tlds2SocketServer.recv(1024).decode('utf-8')
+                        serverResult = tlds2SocketServer.recv(1024).decode('utf-8')
                     else:
                         print("[C]: Client does not connect to anyone")
 

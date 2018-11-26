@@ -103,7 +103,7 @@ def TLDS1Server():
 
             sendToClient = serverName + " " + hostName + " " + hostIPAddress + " " + hostFlag
         else:
-            print("[TLDS2]: {} not found".format(clientRequest))
+            print("[TLDS1]: {} not found".format(clientRequest))
 
             sendToClient = hostNotFoundError
         
