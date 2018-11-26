@@ -1,4 +1,5 @@
-TLDS1Key obama rutgers.edu
-TLDS1Key Trump princeton.edu
-TLDS2KEY kishkish google.com
-TLDS2Key challangeString youtube.com
+TLDS2Key obama rutgers.edu
+TLDS2Key Trump princeton.edu
+TLDS1Key kishkish google.com
+TLDS1Key challangeString youtube.com
+BadKey uselessChalengeString badHost.gov

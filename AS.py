@@ -20,6 +20,9 @@ def AuthenticationServer():
     tlds1ServerHostName = ''
     tlds2ServerHostName = ''
 
+    matchedMessage = "Matched".encode('utf-8')
+    noMatchMessage = "No Match".encode('utf-8')
+
     # Pick port and bind it to this machine's IP address for Client
     port = 6000
     serverBinding = ('', port)
@@ -78,19 +81,21 @@ def AuthenticationServer():
         # Client is authenticated for TLDS1
         if(hmac.compare_digest(clientDigestHex, tlds1DigestHex)):
             print("[AS]: Client authorized for TLDS1")
-            tlds1SocketServer.send("Matched".encode('utf-8'))
-            tlds2SocketServer.send("No Match".encode('utf-8'))
+            tlds1SocketServer.send(matchedMessage)
+            tlds2SocketServer.send(noMatchMessage)
             dataToClient = tlds1ServerName
         # Client is authenticated for TLDS2
         elif(hmac.compare_digest(clientDigestHex, tlds2DigestHex)):
             print("[AS]: Client authorized for TLDS2")
-            tlds2SocketServer.send("Matched".encode('utf-8'))
-            tlds1SocketServer.send("No Match".encode('utf-8'))
+            tlds2SocketServer.send(matchedMessage)
+            tlds1SocketServer.send(noMatchMessage)
             dataToClient = tlds2ServerName
         # No server authenticated for Client
         else:
             print("[AS]: No digest matched")
-            dataToClient = "No Digest Match"
+            tlds1SocketServer.send(noMatchMessage)
+            tlds2SocketServer.send(noMatchMessage)
+            dataToClient = "TLDS servers' digest did not matched client's"
 
         clientSocket.send(dataToClient.encode('utf-8'))
 

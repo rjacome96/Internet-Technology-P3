@@ -13,7 +13,7 @@ def TLDS2Server():
         print("Socket open error {}\n".format(err))
         return
 
-    dnsFile = "PROJ3-TLDS1.txt"
+    dnsFile = "PROJ3-TLDS2.txt"
     keys2File = "PROJ3-KEY2.txt"
     serverName = "TLDS2"
     hostNotFoundError = "Error: HOST NOT FOUND"
