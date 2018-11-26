@@ -1,4 +1,1 @@
-K123
-randomKey
-anotherKey
-Key1
+TLDS2Key

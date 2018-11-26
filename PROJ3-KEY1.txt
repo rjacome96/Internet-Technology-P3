@@ -1,4 +1,1 @@
-test
-noClientKey
-test2
-testKey
+TLDS1Key
