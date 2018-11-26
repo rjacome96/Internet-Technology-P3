@@ -13,6 +13,8 @@ def connectClient():
         print("Socket open error: {0} \n".format(err))
         return
 
+    tlds1ServerName = "TLDS1"
+    tlds2ServerName = "TLDS2"
 
     rsPort = 6000
     #rsHostName = rootServerName
@@ -52,10 +54,14 @@ def connectClient():
                     # Get resulting tlds server from RS server
                     serverResult = rsClientSocket.recv(1024).decode('utf-8')
 
-                    if(serverResult == "TLDS1"):
+                    if(serverResult == tlds1ServerName):
                         print("[C]: Connect to TLDS1")
-                    elif(serverResult == "TLDS2"):
+                        tlds1Socket.send(hostName.encode('utf-8'))
+                        serverResult = tlds1Socket.recv(1024).decode('utf-8')
+                    elif(serverResult == tlds2ServerName):
                         print("[C]: Connect to TLDS2")
+                        tlds2Socket.send(hostName.encode('utf-8'))
+                        serverResult = tlds2Socket.recv(1024).decode('utf-8')
                     else:
                         print("[C]: Client does not connect to anyone")
                 

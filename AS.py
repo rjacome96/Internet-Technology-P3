@@ -15,6 +15,8 @@ def AuthenticationServer():
         print("Socket open error: {0} \n".format(err))
         return
 
+    tlds1ServerName = "TLDS1"
+    tlds2ServerName = "TLDS2"
     tlds1ServerHostName = ''
     tlds2ServerHostName = ''
 
@@ -76,11 +78,15 @@ def AuthenticationServer():
         # Client is authenticated for TLDS1
         if(hmac.compare_digest(clientDigestHex, tlds1DigestHex)):
             print("[AS]: Client authorized for TLDS1")
-            dataToClient = "TLDS1"
+            tlds1SocketServer.send("Matched".encode('utf-8'))
+            tlds2SocketServer.send("No Match".encode('utf-8'))
+            dataToClient = tlds1ServerName
         # Client is authenticated for TLDS2
         elif(hmac.compare_digest(clientDigestHex, tlds2DigestHex)):
             print("[AS]: Client authorized for TLDS2")
-            dataToClient = "TLDS2"
+            tlds2SocketServer.send("Matched".encode('utf-8'))
+            tlds1SocketServer.send("No Match".encode('utf-8'))
+            dataToClient = tlds2ServerName
         # No server authenticated for Client
         else:
             print("[AS]: No digest matched")

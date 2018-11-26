@@ -15,9 +15,11 @@ def TLDS2Server():
 
     dnsFile = "PROJ3-TLDS1.txt"
     keys2File = "PROJ3-KEY2.txt"
+    serverName = "TLDS2"
+    hostNotFoundError = "Error: HOST NOT FOUND"
 
     tlds2_Dict = {}
-    tlds2_keys = []
+    tlds2_Key = None
 
     try:
         with open(dnsFile, "r") as dnsTableFile, open(keys2File, "r") as keysFile:
@@ -32,7 +34,12 @@ def TLDS2Server():
 
             for key in keysFile:
                 key = key.rstrip()
-                tlds2_keys.append(key)
+                tlds2_Key = key
+        
+        if(tlds2_Key == None):
+            print("[TLDS2]: No Key found in file. Please provide a key")
+            return
+
     except FileNotFoundError:
         print("File not Found. Please Try again")
         return
@@ -67,14 +74,42 @@ def TLDS2Server():
 
         print("[TLDS2]: Recieved from root server: {}".format(serverInfo))
 
-        # Might need to delete the array for TLDS server only uses 1 key
-        tldsKey = tlds2_keys[0]
+        tldsKey = tlds2_Key
 
         tlds2Digest = hmac.new(tldsKey.encode(), serverInfo.encode('utf-8'))
 
         tlds2DigestHex = tlds2Digest.hexdigest()
 
         rootSocket.send(tlds2DigestHex.encode('utf-8'))
+
+        serverResponse = rootSocket.recv(1024).decode('utf-8')
+
+        if(serverResponse != "Matched"):
+            print("[TLDS2]: Did not match client's key")
+            continue
+        
+        clientRequest = clientSocket.recv(1024).decode('utf-8')
+
+        if(clientRequest in tlds2_Dict):
+            print("[TLDS2]: {} found".format(clientRequest))
+            
+            hostName = clientRequest
+
+            hostInfo = tlds2_Dict[hostName]
+
+            hostIPAddress = hostInfo[0]
+
+            hostFlag = hostInfo[1]
+
+            sendToClient = serverName + " " + hostName + " " + hostIPAddress + " " + hostFlag
+        else:
+            print("[TLDS2]: {} not found".format(clientRequest))
+
+            sendToClient = hostNotFoundError
+        
+        clientSocket.send(sendToClient.encode('utf-8'))
+
+
 
 
     time.sleep(10)
