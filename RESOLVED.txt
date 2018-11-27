@@ -2,4 +2,4 @@ TLDS2 rutgers.edu 100.100.50.50 A
 TLDS2 princeton.edu 150.50.200.5 A
 TLDS1 google.com 123.45.67.8 A
 TLDS1 youtube.com 20.200.100.10 A
-No Digest Match
+TLDS servers' digest did not matched client's

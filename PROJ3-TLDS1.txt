@@ -1,4 +1,6 @@
-google.com 123.45.67.8 A
-funnyjunk.com 255.255.255.255 A
-candystand.com 42.0.69.0 A
-youtube.com 20.200.100.10 A
+qtsdatacenter.aws.com  128.64.3.2  A
+mx.rutgers.edu   192.64.4.2  A
+kill.cs.rutgers.edu 182.48.3.2 A
+www.ibm.com 64.42.3.4 A
+www.google.com  8.6.4.2 A
+grep.cs.rutgers.edu   -  NS

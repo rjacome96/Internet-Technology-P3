@@ -1,5 +1,4 @@
-TLDS2Key obama rutgers.edu
-TLDS2Key Trump princeton.edu
-TLDS1Key kishkish google.com
-TLDS1Key challangeString youtube.com
-BadKey uselessChalengeString badHost.gov
+k3521 ramirez mx.rutgers.com
+k6854 fedora kill.cs.rutgers.edu
+k6854 wales www.ibm.edu
+k3521 roberts www.google.com
