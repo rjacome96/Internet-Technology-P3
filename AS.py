@@ -86,6 +86,11 @@ def AuthenticationServer():
 
 
         # Compare client's digest with both servers' digests
+        # Root server will always message back the TLDS servers
+        # To let them know to either continue their program
+        # Or wait for client to connect to them
+        # There is most likely a way around this but works for now
+
         # Client is authenticated for TLDS1
         if(hmac.compare_digest(clientDigestHex, tlds1DigestHex)):
             print("[AS]: Client authorized for TLDS1")

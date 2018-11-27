@@ -1,5 +1,11 @@
-TLDS2 rutgers.edu 100.100.50.50 A
-TLDS2 princeton.edu 150.50.200.5 A
-TLDS1 google.com 123.45.67.8 A
-TLDS1 youtube.com 20.200.100.10 A
+Error: HOST NOT FOUND
+Error: HOST NOT FOUND
+Error: HOST NOT FOUND
 TLDS servers' digest did not matched client's
+TLDS1 www.google.com 8.6.4.2 A
+TLDS1 grep.cs.rutgers.edu - NS
+TLDS1 mx.rutgers.edu 192.64.4.2 A
+TLDS1 kill.cs.rutgers.edu 182.48.3.2 A
+TLDS1 www.ibm.com 64.42.3.4 A
+TLDS2 www.rutgers.com 192.64.4.4 A
+TLDS2 qtsdatacenter.aws.edu 128.60.3.2 A
