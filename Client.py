@@ -20,7 +20,7 @@ def connectClient():
     tlds2ServerName = "TLDS2"
 
     # The host names of AS and TLDS servers, hard coded as requested
-    tlds1ServerHostName = "cpps.cs.rutgers.edu"
+    tlds1ServerHostName = "cpp.cs.rutgers.edu"
     tlds2ServerHostName = "java.cs.rutgers.edu"
     rsHostName = ''
 
