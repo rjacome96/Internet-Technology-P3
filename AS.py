@@ -21,8 +21,8 @@ def AuthenticationServer():
     tlds2ServerName = "TLDS2"
 
     # The names of the TLDS servers, will be given as input later
-    tlds1ServerHostName = "kill.cs.rutgers.edu"
-    tlds2ServerHostName = "grep.cs.rutgers.edu"
+    tlds1ServerHostName = "cpp.cs.rutgers.edu"
+    tlds2ServerHostName = "java.cs.rutgers.edu"
 
     # Easier to send to TLDS whether their digests matched with the client's
     matchedMessage = "Matched".encode('utf-8')

@@ -40,9 +40,9 @@ def TLDS1Server():
             
             for key in keysFile:
                 key = key.rstrip()
-                tlds1_key = key
+                tlds1_Key = key
         
-        if(tlds1_key == None):
+        if(tlds1_Key == None):
             print("[TLDS1]: No key found in file. Please provide a key")
             return
     except FileNotFoundError:
