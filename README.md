@@ -11,7 +11,7 @@ Roy Jacome & Kishan Patel
 
 Python version used across all programs: Python 3
 
-How to Run our Project: First start TLDS2.py, second TLDS1.py, Third AS.py, and finally Client.py
+How to Run our Project: First start TLDS2.py, second TLDS1.py, third AS.py, and finally Client.py. All ports and IP addresses are hard coded as requested in the project announcment. No input is needed for any program, however, the TLDS servers and client assume that text files: "PROJ3-TLDS2.txt", "PROJ3-KEY2.txt", "PROJ3-TLDS1.txt", "PROJ3-KEY1.txt", and "PROJ3-HNS.txt" are within the same directory as the program running respectively.
 
 Client program creates three sockets and immediately connects to Root (Authentication) server and the two TLDS servers. Client then reads in the given HNS file one line at a time. It takes the given key and challange string, creates the digest and sends the challenge and digest to the root server. Client then waits for a response from server to indicate which of the two TLDS servers to connect to. Once an answer is given, Client connects to appropiate TLDS server, feeds it the hostname request and writes the reply into the RESLOVED.txt file
 

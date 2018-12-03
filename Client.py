@@ -19,10 +19,10 @@ def connectClient():
     tlds1ServerName = "TLDS1"
     tlds2ServerName = "TLDS2"
 
-    # The host names of AS and TLDS servers, will be given as input later most likely
-    tlds1ServerHostName = "kill.cs.rutgers.edu"
-    tlds2ServerHostName = "grep.cs.rutgers.edu"
-    rsHostName = "facade.cs.rutgers.edu"
+    # The host names of AS and TLDS servers, hard coded as requested
+    tlds1ServerHostName = "cpps.cs.rutgers.edu"
+    tlds2ServerHostName = "java.cs.rutgers.edu"
+    rsHostName = ''
 
     # Create the connections for the servers
     rsPort = 6000
