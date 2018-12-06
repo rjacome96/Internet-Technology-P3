@@ -36,6 +36,9 @@ def TLDS1Server():
                 ipAddress = recordString[1]
                 flag = recordString[2].rstrip()
                 
+                if flag == "NS":
+                    continue
+
                 tlds1_Dict[hostName] = (ipAddress, flag)
             
             for key in keysFile:

@@ -1,11 +1,4 @@
 k3521 ramirez mx.rutgers.com
 k6854 fedora kill.cs.rutgers.edu
 k6854 wales www.ibm.edu
-someKey challenge www.ibm.com
 k3521 roberts www.google.com
-k3521 random grep.cs.rutgers.edu
-k3521 aString mx.rutgers.edu
-k3521 fedora kill.cs.rutgers.edu
-k3521 notWales www.ibm.com
-k6854 rutgerString www.rutgers.com
-k6854 randomString qtsdatacenter.aws.edu

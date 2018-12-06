@@ -108,7 +108,7 @@ def AuthenticationServer():
             print("[AS]: No digest matched")
             tlds1SocketServer.send(noMatchMessage)
             tlds2SocketServer.send(noMatchMessage)
-            dataToClient = "TLDS servers' digest did not matched client's"
+            dataToClient = "Error: CLIENT'S DIGEST DID NOT MATCH TO ANY SERVER DIGEST"
 
         clientSocket.send(dataToClient.encode('utf-8'))
 
